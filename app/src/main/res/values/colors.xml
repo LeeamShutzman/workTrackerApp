@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#EF6C00</color>
+    <color name="onTheClock">#089118</color>
+    <color name="offTheClock">#8B0000</color>
+</resources>
