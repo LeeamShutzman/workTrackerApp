@@ -5,12 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -68,7 +65,6 @@ public class LogIn extends AppCompatActivity {
                 @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
                 public void onClick(View view) {
-                    startDataCollection();
                     logInButton(view, sharedPreferences);
                 }
             });
@@ -122,26 +118,6 @@ public class LogIn extends AppCompatActivity {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public void startDataCollection(){
-        //set time to 23:59
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY,23);
-        calendar.set(Calendar.MINUTE, 59);
-        calendar.set(Calendar.SECOND, 0);
-        if(Calendar.getInstance().getTimeInMillis() > calendar.getTimeInMillis())
-            calendar.add(Calendar.DATE, 1);
-
-        //set intent to execute data collection every day
-        Intent notifyIntent = new Intent(getApplicationContext(),MyReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 69, notifyIntent, 0);
-
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
     }
 
 }
