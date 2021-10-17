@@ -26,6 +26,7 @@ public class MainScreen extends AppCompatActivity {
     public static final String START_TIME = "startTime";
     public static final String ROUNDED_TOTAL = "roundedTotal";
     public static final String WORKED_TODAY = "workedToday";
+    public static final String CURRENT_DATE = "currentDate";
     public static final int ALARM_HOUR = 23;
     public static final int ALARM_MINUTE = 59;
     public static final int ALARM_SECOND = 0;
@@ -90,7 +91,6 @@ public class MainScreen extends AppCompatActivity {
             //workedToday becomes true after the first work session of the day, making it so that this code is skipped on future presses of the button
             //alarm is set when the first work session of the day is stopped. workedToday is reset to false in MyReciever class when data is uploaded
             if(!sharedPreferences.getBoolean(WORKED_TODAY, false)){
-
                 //set time to 23:59
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(Calendar.HOUR_OF_DAY, ALARM_HOUR);
@@ -107,6 +107,7 @@ public class MainScreen extends AppCompatActivity {
 
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
 
+                innerEditor.putString(CURRENT_DATE, new Date(System.currentTimeMillis()).toString());
                 innerEditor.putBoolean(WORKED_TODAY, true);
                 innerEditor.commit();
             }

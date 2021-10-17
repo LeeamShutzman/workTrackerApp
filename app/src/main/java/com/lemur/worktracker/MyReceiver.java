@@ -28,7 +28,7 @@ public class MyReceiver extends BroadcastReceiver {
                 float total = (float) sharedPreferences.getLong(MainScreen.TOTAL_TIME, 0) / (float) 3600000.0;
                 Statement statement = LogIn.connection.createStatement();
                 statement.executeUpdate("Insert into days values('" + sharedPreferences.getString(LogIn.REMEMBERED_USER, "noUser") + "', "
-                        + "cast('" + new Date(System.currentTimeMillis()).toString() + "' as date), "
+                        + "cast('" + sharedPreferences.getString(MainScreen.CURRENT_DATE, new Date(System.currentTimeMillis()).toString()) + "' as date), "
                         + total + ")");
                 editor.putLong(MainScreen.TOTAL_TIME, 0);
                 editor.putFloat(MainScreen.ROUNDED_TOTAL, 0);
