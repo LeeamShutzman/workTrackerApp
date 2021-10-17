@@ -107,7 +107,9 @@ public class MainScreen extends AppCompatActivity {
 
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
 
+                //set date here to avoid issues around midnight
                 innerEditor.putString(CURRENT_DATE, new Date(System.currentTimeMillis()).toString());
+
                 innerEditor.putBoolean(WORKED_TODAY, true);
                 innerEditor.commit();
             }
